@@ -1,0 +1,388 @@
+/* Design tokens */
+:root {
+  --pandan: #1F6F58;
+  --mint: #EDF4F0;
+  --ink: #10302A;
+  --marigold: #F4B63F;
+
+  --bg: var(--mint);
+  --text: var(--ink);
+  --muted: #3D5A52;
+  --field-bg: #FFFFFF;
+  --field-border: #5E7A72;
+  --card-bg: var(--pandan);
+  --card-text: #FFFFFF;
+  --card-muted: #D7EAE2;
+  --panel-border: #B9CEC6;
+  --error: #A3261B;
+  --focus-halo: var(--ink);
+  --quiet-bg: transparent;
+  --quiet-text: var(--ink);
+  --quiet-border: var(--ink);
+
+  --font: 'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --radius: 14px;
+  --gutter: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0B1E19;
+    --text: #E4F0EA;
+    --muted: #A9C4BA;
+    --field-bg: #12302A;
+    --field-border: #7C9C92;
+    --card-bg: #1A5E4B;
+    --card-text: #FFFFFF;
+    --card-muted: #CFE5DC;
+    --panel-border: #2E4C44;
+    --error: #FF9C8F;
+    --focus-halo: var(--bg);
+    --quiet-text: #E4F0EA;
+    --quiet-border: #A9C4BA;
+  }
+}
+
+/* Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--marigold);
+  outline-offset: 0;
+  box-shadow: 0 0 0 6px var(--focus-halo);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Layout: one calm column on every screen size */
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding:
+    max(28px, env(safe-area-inset-top))
+    max(var(--gutter), env(safe-area-inset-right))
+    max(40px, env(safe-area-inset-bottom))
+    max(var(--gutter), env(safe-area-inset-left));
+}
+
+@media (min-width: 860px) {
+  .page {
+    padding-top: max(72px, env(safe-area-inset-top));
+  }
+}
+
+/* Intro */
+h1 {
+  font-size: clamp(2rem, 7vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 1.125rem;
+}
+
+/* Form */
+.form {
+  margin-top: 28px;
+  display: grid;
+  gap: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 1rem; /* 16px stops iOS zooming on focus */
+  color: var(--text);
+  background-color: var(--field-bg);
+  border: 2px solid var(--field-border);
+  border-radius: 10px;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 44px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) 50%,
+    calc(100% - 16px) 50%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+[aria-invalid='true'] {
+  border-color: var(--error);
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.error:empty {
+  display: none;
+}
+
+.button {
+  min-height: 48px;
+  padding: 12px 22px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--marigold);
+  border: 2px solid var(--marigold);
+  border-radius: 999px;
+  cursor: pointer;
+  justify-self: start;
+}
+
+.button:hover {
+  background: #F7C562;
+}
+
+.button-quiet {
+  color: var(--quiet-text);
+  background: var(--quiet-bg);
+  border-color: var(--quiet-border);
+}
+
+.button-quiet:hover {
+  background: color-mix(in srgb, var(--marigold) 22%, transparent);
+}
+
+/* Note page */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 12px;
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.card {
+  position: relative;
+  padding: 28px 24px 26px;
+  background: var(--card-bg);
+  color: var(--card-text);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 40px -24px rgb(16 48 42 / 0.55);
+}
+
+.card:focus {
+  outline: none;
+}
+
+.card-enter {
+  animation: rise 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-enter {
+    animation: none;
+  }
+}
+
+.greeting {
+  /* Leave room so long names never run under the stamp */
+  padding-right: 96px;
+  min-height: 72px; /* keeps the wish below the stamp when the name is short */
+  font-size: clamp(1.9rem, 8vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  overflow-wrap: anywhere;
+}
+
+.wish {
+  margin-top: 22px;
+  font-size: 1.125rem;
+}
+
+.position-line {
+  margin-top: 14px;
+  font-size: 1.125rem;
+}
+
+.signoff {
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid rgb(255 255 255 / 0.28);
+  color: var(--card-muted);
+  font-size: 0.98rem;
+}
+
+/* The postmark */
+.stamp {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 84px;
+  height: 84px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  color: var(--marigold);
+  border: 2.5px dashed var(--marigold);
+  border-radius: 50%;
+  outline: 1.5px solid var(--marigold);
+  outline-offset: 4px;
+  transform: rotate(-12deg);
+  line-height: 1.05;
+}
+
+.stamp-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.stamp-date {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Saved image fallback */
+.save-preview {
+  margin: 20px 0 0;
+}
+
+.save-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 2px solid var(--panel-border);
+}
+
+.save-preview figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Keep in touch */
+.connect {
+  margin-top: 40px;
+  padding: 24px;
+  border: 2px solid var(--panel-border);
+  border-radius: var(--radius);
+}
+
+.connect h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.connect p {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  text-decoration: none;
+}
+
+.button-link svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+
+.noscript {
+  padding: 16px var(--gutter);
+}
+
+@media (max-width: 380px) {
+  .card {
+    padding: 24px 18px 22px;
+  }
+  .stamp {
+    top: 12px;
+    right: 12px;
+    width: 72px;
+    height: 72px;
+  }
+  .greeting {
+    padding-right: 80px;
+    min-height: 64px;
+  }
+  .stamp-label {
+    font-size: 0.72rem;
+  }
+  .stamp-date {
+    font-size: 1.05rem;
+  }
+}

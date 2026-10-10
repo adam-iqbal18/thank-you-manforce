@@ -1,0 +1,17 @@
+{
+  "name": "thank-you-manforce",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A personalised farewell note for colleagues at Manforce, opened from a QR code.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.js",
+    "qr": "node scripts/make-qr.js"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

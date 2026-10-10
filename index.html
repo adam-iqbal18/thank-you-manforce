@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#EDF4F0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0B1E19" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="A thank-you note from the IT intern to everyone at Manforce.">
+  <title>Thank you, Manforce</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap">
+  <link rel="stylesheet" href="src/styles.css">
+  <script type="module" src="src/form.js"></script>
+</head>
+<body>
+  <main class="page">
+    <section class="intro" aria-labelledby="headline">
+      <h1 id="headline">Four months, one thank-you for each of you</h1>
+      <p class="lede">Type your name and where you work. I'll write you a note.</p>
+
+      <form id="wish-form" class="form" novalidate>
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="given-name" maxlength="60"
+                 aria-describedby="name-error" required>
+          <p id="name-error" class="error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="department">Department</label>
+          <select id="department" name="department" aria-describedby="department-error" required>
+            <option value="" selected disabled>Choose your department</option>
+          </select>
+          <p id="department-error" class="error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="position">Position</label>
+          <select id="position" name="position" aria-describedby="position-error" required>
+            <option value="" selected disabled>Choose your position</option>
+          </select>
+          <p id="position-error" class="error" role="alert"></p>
+        </div>
+
+        <button type="submit" class="button">Show my wish</button>
+      </form>
+    </section>
+
+  </main>
+  <noscript><p class="noscript">This note needs JavaScript to write itself. Please turn it on and reload.</p></noscript>
+</body>
+</html>
